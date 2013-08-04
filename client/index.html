@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Developer API</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+
+  <div id="view" ng-controller="mainCtrl">
+    <h1>{{meta.name}} API</h1>
+
+    <div class="btn-group pull-right">
+      <button type="button" class="btn btn-primary" ng-model="showType" btn-radio="'Table'">Table</button>
+      <button type="button" class="btn btn-primary" ng-model="showType" btn-radio="'Tabs'">Tabs</button>
+    </div>
+
+    <div>App Name: {{meta.name}}</div>
+    <div>Version: {{meta.version}}</div>
+    <div>Base URL: {{meta.baseURL}}</div>
+
+    <table ng-show="showType == 'Table'" class="table table-bordered table-hover table-striped">
+      <tbody>
+        <tr ng-repeat="item in api.tableData">
+          <td ng-show="item.heading">
+            <b>{{item.heading}}</b>
+          </td>
+          <td ng-show="item.heading">&nbsp;</td>
+          <td ng-show="item.heading">&nbsp;</td>
+
+          <td ng-show="!item.heading">&nbsp;</td>
+          <td ng-show="!item.heading">
+            <a class="btn {{map(item.method)}} disabled">{{item.method}}</a>
+          </td>
+          <td ng-show="!item.heading">
+            <b>{{item.url}}</b>
+            <p>{{item.description}}</p>
+            <tabset>
+              <tab heading="Structure">
+                <textarea rows="{{item.data && 5 || 1}}" class="span8">{{item.data | json}}</textarea>
+                <textarea rows="{{item.data && 5 || 9}}" class="span8">{{item.resp | json}}</textarea>
+              </tab>
+              <tab heading="Example">
+                <textarea rows="{{item.data && 5 || 1}}" class="span8">{{item.example_data | json}}</textarea>
+                <textarea rows="{{item.data && 5 || 9}}" class="span8">{{item.example_resp | json}}</textarea>
+              </tab>
+            </tabset>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <tabset ng-show="$parent.showType == 'Tabs'">
+      <tab ng-repeat="group in api.tabsData" heading="{{group.heading}}">
+        <table class="table table-bordered table-hover table-striped">
+          <tbody>
+            <tr ng-repeat="item in group.data">
+              <td>
+                <a class="btn {{map(item.method)}} disabled">{{item.method}}</a>
+              </td>
+              <td>
+                <b>{{item.url}}</b>
+                <p>{{item.description}}</p>
+                <tabset>
+                  <tab heading="Structure">
+                    <textarea rows="{{item.data && 5 || 1}}" class="span8">{{item.data | json}}</textarea>
+                    <textarea rows="{{item.data && 5 || 9}}" class="span8">{{item.resp | json}}</textarea>
+                  </tab>
+                  <tab heading="Example">
+                    <textarea rows="{{item.data && 5 || 1}}" class="span8">{{item.example_data | json}}</textarea>
+                    <textarea rows="{{item.data && 5 || 9}}" class="span8">{{item.example_resp | json}}</textarea>
+                  </tab>
+                </tabset>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+    </tabset>
+  </div>
+
+<!-- Libraries -->
+<script src="js/lib/d3/d3.v3.min.js"></script>
+<script src="js/lib/jquery/jquery-1.9.1.js"></script>
+<script src="js/lib/moment/moment-2.0.0.js"></script>
+<script src="js/lib/underscore/underscore-min.js"></script>
+<script src="js/lib/angular/angular.min.js"></script>
+<script src="js/lib/ui-bootstrap.min.js"></script>
+
+<!-- Module -->
+<script src="js/module.js"></script>
+
+<!-- Controllers -->
+<script src="js/app/ctrl/main.js"></script>
+
+<!-- Directives -->
+
+<!-- Services -->
+
+<!-- Filters -->
+
+<!-- Main -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
