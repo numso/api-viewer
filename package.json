@@ -1,7 +1,7 @@
 {
-  "name": "Minetrocity",
-  "version": "0.0.1",
-  "private": true,
+  "name": "api-viewer",
+  "version": "0.0.2",
+  "private": false,
   "scripts": {
     "start": "node server/app"
   },
@@ -9,6 +9,7 @@
     "express": "3.0.4",
     "stylus": "*",
     "request": "~2.25.0",
-    "config": "~0.4.28"
+    "config": "~0.4.28",
+    "underscore": "~1.5.2"
   }
 }

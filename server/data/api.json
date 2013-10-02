@@ -1,0 +1,53 @@
+[
+  {
+    "group":"Authentication",
+    "url":"/login",
+    "description":"This call will log you in to the server.",
+    "method":"POST",
+    "example_data":{
+      "username":"bubba",
+      "password":"test"
+    },
+    "example_resp":{
+      "success":true
+    },
+    "resp":{
+      "success":"Boolean",
+      "err":"String",
+      "acl":[
+        "String"
+      ]
+    },
+    "data":{
+      "username":"String",
+      "password":"String"
+    }
+  },
+  {
+    "group":"Authentication",
+    "url":"/logout",
+    "description":"This call will log you out of the server.",
+    "method":"GET",
+    "example_resp":{
+      "success":true
+    },
+    "resp":{
+      "success":"Boolean",
+      "err":"String"
+    }
+  },
+  {
+    "group":"Other",
+    "url":"/getSomething",
+    "description":"This call will get something cool.",
+    "method":"GET",
+    "example_resp":{
+      "success":true,
+      "secrets": "super secret stuff"
+    },
+    "resp":{
+      "success":"Boolean",
+      "secrets":"String"
+    }
+  }
+]

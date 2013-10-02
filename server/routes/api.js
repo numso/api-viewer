@@ -1,17 +1,25 @@
-var request = require('request')
-     config = require('config');
+var      fs = require('fs'),
+    request = require('request'),
+     config = require('config'),
+          _ = require('underscore');
 
-var c = config.couch,
-    m = config.meta;
-
-var couchURL = 'http://' + c.url + ':' + c.port + '/' + c.db;
+var c = config.couch;
+var m = config.meta;
+var f = config.file;
 
 module.exports = function (app) {
-  app.get('/api', getAPI);
+  app.get('/couch/api', getAPIfromCouch);
+  app.get('/file/api', getAPIfromFile);
   app.get('/meta', getMeta);
 };
 
-function getAPI(req, res, next) {
+function getAPIfromFile(req, res, next) {
+  var fileAPI = fs.readFileSync(f.path, 'utf-8');
+  res.send(fileAPI);
+}
+
+function getAPIfromCouch(req, res, next) {
+  var couchURL = 'http://' + c.url + ':' + c.port + '/' + c.db;
   var url = couchURL + '/_all_docs?include_docs=true';
 
   request({
@@ -27,7 +35,18 @@ function getAPI(req, res, next) {
         res.end('timeout');
       }
     }
-  }).pipe(res);
+    else {
+      body = JSON.parse(body);
+
+      var json = _.map(body.rows, function (data) {
+        delete data.doc._id;
+        delete data.doc._rev;
+        return data.doc;
+      });
+
+      res.send(json);
+    }
+  });
 }
 
 function getMeta(req, res, next) {

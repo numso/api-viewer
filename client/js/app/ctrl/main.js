@@ -30,13 +30,12 @@ angular.module('api').controller('mainCtrl',
       }
     );
 
-    $http.get('/api').then(
+    $http.get('/file/api').then(
       function (resp) {
-        var rows = resp.data.rows;
-
+        var rows = resp.data;
         var tempObj = {};
         for (var i = 0; i < rows.length; ++i) {
-          var d = rows[i].doc;
+          var d = rows[i];
           tempObj[d.group] = tempObj[d.group] || [];
           tempObj[d.group].push(d);
         }
