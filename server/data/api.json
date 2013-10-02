@@ -13,10 +13,7 @@
     },
     "resp":{
       "success":"Boolean",
-      "err":"String",
-      "acl":[
-        "String"
-      ]
+      "err":"String"
     },
     "data":{
       "username":"String",
