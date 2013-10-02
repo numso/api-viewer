@@ -31,4 +31,8 @@ Here's how you format each API call:
 }
 ```
 
+Here's how it will look:
+
+![screenshot](screenshot.png)
+
 If you use `GET /file/api`, save an array of these objects at `config.file.path`. If you use `GET /couch/api` then make sure the database indicated at `config.couch` is full of documents that have the above format.
